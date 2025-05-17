@@ -6,5 +6,5 @@ export const userRouter = Router();
 
 userRouter.post("/register",userRegister);
 userRouter.get("/get/:name",userGet);
-userRouter.put("/update",userUpdate);
-userRouter.delete("/delete",userDelete)
+userRouter.put("/update/:name",userUpdate);
+userRouter.delete("/delete/:name",userDelete)

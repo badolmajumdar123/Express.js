@@ -43,9 +43,9 @@ export const userGet = async (req,res) => {
 
        }
        
-       const user = await userModel.findOne({name});
+       const userGet = await userModel.findOne({name});
 
-       return res.status(200).json({message: "User Detail",user});
+       return res.status(200).json({message: "User Detail",userGet});
 
         
     } catch (error) {
@@ -64,11 +64,31 @@ export const userUpdate = async (req,res) => {
      
     try {
     
-        
+        const { name } = req.params;
+        const { email,password } = req.body;
+ 
+          
 
-        
-    } catch (error) {
+           const userUpdate = await userModel.updateOne(
+            {name},
+            {$set: { email,password}}
+           )
 
+
+           if(!userUpdate){
+
+              return res.status(404).json({error: "User  Not update"})
+
+           }
+           
+
+              return res.status(200).json({message: "User Update",userUpdate});
+         
+
+      } catch (error) {
+
+      console.error(error);
+      return  res.status(500).json({error: "Internal Server Error"});
 
         
     }
@@ -80,7 +100,7 @@ export const userUpdate = async (req,res) => {
 
 export const userDelete = async (req,res) => {
 
-
+        
 
     
 }
