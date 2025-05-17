@@ -66,7 +66,7 @@ export const userLogin = async (req,res) => {
              res.cookie('session', user._id, {
                     httpOnly: true,       
                     maxAge: 60 * 60 * 1000, 
-                    secure: process.env.NODE_END === 'production'
+                    secure: process.env.NODE_ENV === 'production'
                    });
             return res.status(200).json({message: "User Login Successfully",});
 
