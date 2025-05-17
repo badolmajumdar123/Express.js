@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userRegister,userGet,userUpdate,userDelete } from "../controller/user.controller.js";
+import { userRegister,userGet,userUpdate,userDelete,userLogin } from "../controller/user.controller.js";
 
 
 export const userRouter = Router();
@@ -7,4 +7,5 @@ export const userRouter = Router();
 userRouter.post("/register",userRegister);
 userRouter.get("/get/:name",userGet);
 userRouter.put("/update/:name",userUpdate);
-userRouter.delete("/delete/:name",userDelete)
+userRouter.delete("/delete/:name",userDelete);
+userRouter.post("/login",userLogin)

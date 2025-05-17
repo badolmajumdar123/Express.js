@@ -4,6 +4,7 @@
  */
 
 import { userModel } from "../model/user.model.js"
+import bcrypt from "bcrypt";
 
 export const userRegister = async (req,res) => {
 
@@ -16,8 +17,11 @@ export const userRegister = async (req,res) => {
           return  res.status(404).json({error: "All params Not Found"});
 
         }
+              
+         const salt = bcrypt.genSaltSync(10);
+         const hashedPassword = bcrypt.hashSync(password, salt);
 
-        const user = await userModel.create({name,password,email});
+        const user = await userModel.create({name,password : hashedPassword,email});
 
         return res.status(200).json({message: "User Register Successfully",user});
         
@@ -29,6 +33,82 @@ export const userRegister = async (req,res) => {
     }
 
 }
+
+
+ 
+export const userLogin = async (req,res) => {
+
+       try {
+        
+        const { email, password } = req.body;
+
+        if(!email || !password){
+
+        return res.status(400).json({message: "Prames Not Found"});
+
+        }
+
+         const user = await userModel.findOne({ email });
+         
+         if(!user){
+
+            return res.status(400).json({message: "User Not Found"});
+
+         }
+
+         const isMatch = await bcrypt.compare(password, user.password);
+
+           if(!isMatch){
+
+             return res.status(401).json({message: "User Pssawor Not match"});
+
+           }
+         
+            return res.status(200).json({message: "User Login Successfully",});
+
+        
+       } catch (error) {
+
+        console.error(error);
+        return  res.status(500).json({error: "Internal Server Error"});
+        
+       }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const userGet = async (req,res) => {
