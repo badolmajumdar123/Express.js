@@ -63,7 +63,7 @@ export const userLogin = async (req,res) => {
              return res.status(401).json({message: "User Pssawor Not match"});
 
            }
-             res.cookie('session', user._id.toString(), {
+             res.cookie('session', user._id, {
                     httpOnly: true,       
                     maxAge: 60 * 60 * 1000, 
                     secure: process.env.NODE_END === 'production'
@@ -122,7 +122,21 @@ export const userLogin = async (req,res) => {
 
 export const userLogout = async (req,res) => {
 
+    
+         try {
+         
+          
+          res.cookie('session', '', { maxAge: 0 });
+          return res.status(200).json({message: "LogOut successfully"})
+          
+         } catch (error) {
 
+          console.log(error);
+          return  res.status(500).json({error: "Internal Server Error"});
+         
+
+
+         }
 
 
 
