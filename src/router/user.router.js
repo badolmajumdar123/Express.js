@@ -5,6 +5,6 @@ import { userRegister,userGet,userUpdate,userDelete } from "../controller/user.c
 export const userRouter = Router();
 
 userRouter.post("/register",userRegister);
-userRouter.get("/get",userGet);
+userRouter.get("/get/:name",userGet);
 userRouter.put("/update",userUpdate);
 userRouter.delete("/delete",userDelete)
