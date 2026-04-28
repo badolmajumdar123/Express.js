@@ -11,7 +11,7 @@ export const userRegister = async (req,res) => {
     try {
 
         const {name,password,email} = req.body;
-
+          console.log(name,password,email);
         if(!name || !password || !email){
 
           return  res.status(404).json({error: "All params Not Found"});
@@ -20,9 +20,9 @@ export const userRegister = async (req,res) => {
               
          const salt = bcrypt.genSaltSync(10);
          const hashedPassword = bcrypt.hashSync(password, salt);
-
+                console.log(hashedPassword);
         const user = await userModel.create({name,password : hashedPassword,email});
-
+               console.log(user);
         return res.status(200).json({message: "User Register Successfully",user});
         
     } catch (error) {
