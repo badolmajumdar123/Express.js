@@ -150,6 +150,36 @@ export const userLogout = async (req,res) => {
 
 
 
+// export const userLogout = async (req,res) => {
+
+    
+//          try {
+         
+          
+//           res.cookie('session', '', { maxAge: 0 });
+//           return res.status(200).json({message: "LogOut successfully"})
+          
+//          } catch (error) {
+
+//           console.log(error);
+//           return  res.status(500).json({error: "Internal Server Error"});
+         
+
+
+//          }
+
+
+
+// }
+
+
+
+
+
+
+
+
+
 
 
 
